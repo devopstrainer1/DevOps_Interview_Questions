@@ -1,0 +1,57 @@
+nagios installation
+yum update
+ 1002  clear
+ 1003  yum install httpd mariadb-server php php-mysql
+ 1004   systemctl enable httpd.service
+ 1005   systemctl enable mariadb.service
+ 1006  clear
+ 1007  yum install gcc glibc glibc-common wget gd gd-devel perl postfix unzip
+ 1008  cd /tmp
+ 1009  ls -lrt
+ 1010  clear
+ 1011  wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.2.tar.
+gz
+ 1012  ls -lrt
+ 1013  tar xzf nagioscore.tar.gz
+ 1014  ls -lrt
+ 1015  clear
+ 1016  ls -lrt
+ 1017  ls -lrt | grep nagios
+ 1018  cd nagioscore-nagios-4.4.2/
+ 1019  ls -lrt
+ 1020  ./configure
+ 1021  make all
+ 1022  make install-groups-users
+ 1023  usermod -a -G nagios apache
+ 1024  make install
+ 1025  make install-init
+ 1026  make install-commandmode
+ 1027  make install-config
+ 1028  make install-webconf
+ 1029  make install-daemoninit
+ 1030  clear
+ 1031  systemctl restart httpd
+ 1032  systemctl status httpd
+ 1033  htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+ 1034  yum install gcc glibc glibc-common make gettext automake autoconf wget openssl-devel net-snmp net-s
+nmp-utils
+ 1035  clear
+ 1036  cd /tmp
+ 1037  wget --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugi
+ns/archiv
+ 1038  wget --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugi
+ns/archive/release-2.2.1.tar.gz
+ 1039  ls -lrt
+ 1040  tar zxf nagios-plugins.tar.gz
+ 1041  ls -lrt
+ 1042  ls -lrt | grep nagios
+ 1043  cd nagios-plugins-release-2.2.1/
+ 1044  ls -lrt
+ 1045  clear
+ 1046  ./tools/setup
+ 1047  ./configure
+ 1048  make
+ 1049  make install
+ 1050  clear
+ 1051  systemctl start nagios
+ 1052  systemctl status nagios
